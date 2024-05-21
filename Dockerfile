@@ -6,6 +6,13 @@ RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
 RUN apt-get update -y && apt-get upgrade -y && useradd -m actions
 
+RUN apt-get install wget apt-transport-https software-properties-common
+
+RUN wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb
+RUN rm packages-microsoft-prod.deb
+
+RUN apt-get update -y
+
 RUN apt-get install -y --no-install-recommends \
     curl \
     jq \
@@ -17,10 +24,10 @@ RUN apt-get install -y --no-install-recommends \
     python3-dev \
     python3-pip \
     git \
-    wget \
     zip \
     unzip \
-    ca-certificates
+    ca-certificates \
+    powershell
 
 RUN cd /home/actions && mkdir actions-runner && cd actions-runner \
     && curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \

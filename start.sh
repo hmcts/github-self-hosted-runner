@@ -3,10 +3,16 @@
 GH_OWNER=$GH_OWNER
 GH_REPOSITORY=$GH_REPOSITORY
 GH_TOKEN=$GH_TOKEN
+RUNNER_NAME_PREFIX=$RUNNER_NAME_PREFIX
 LABELS=$LABELS
 
 RUNNER_SUFFIX=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 5 | head -n 1)
-RUNNER_NAME="landing-zone-runner-${RUNNER_SUFFIX}"
+
+if [ -z "$RUNNER_NAME_PREFIX" ]; then
+    RUNNER_NAME="self-hosted-runner-${RUNNER_SUFFIX}"
+else
+    RUNNER_NAME="${RUNNER_NAME_PREFIX}-${RUNNER_SUFFIX}"
+fi
 
 REG_TOKEN=$(curl -sX POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/${GH_OWNER}/${GH_REPOSITORY}/actions/runners/registration-token | jq .token --raw-output)
 

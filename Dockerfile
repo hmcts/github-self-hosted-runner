@@ -29,6 +29,8 @@ RUN apt-get install -y --no-install-recommends \
     ca-certificates \
     powershell
 
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
 RUN cd /home/actions && mkdir actions-runner && cd actions-runner \
     && curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
     && tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz

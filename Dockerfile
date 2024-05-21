@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 ARG RUNNER_VERSION="2.316.1"
 
 ENV DEBIAN_FRONTEND=noninteractive

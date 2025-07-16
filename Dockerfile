@@ -31,6 +31,8 @@ RUN apt-get install -y --no-install-recommends \
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
+RUN pwsh -Command "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted; Install-Module -Name Az -Scope AllUsers -Force -AllowClobber"
+
 RUN curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
 
 RUN cd /home/actions && mkdir actions-runner && cd actions-runner \

@@ -2,5 +2,18 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>hmcts/.github:renovate-config"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Dockerfile$/"
+      ],
+      "matchStrings": [
+        "ARG RUNNER_VERSION=\"(?<currentValue>.*?)\""
+      ],
+      "depNameTemplate": "actions/runner",
+      "datasourceTemplate": "github-tags"
+    }
   ]
 }

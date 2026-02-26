@@ -1,5 +1,5 @@
 FROM ubuntu:24.04
-ARG RUNNER_VERSION="2.326.0"
+ARG RUNNER_VERSION="2.329.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
